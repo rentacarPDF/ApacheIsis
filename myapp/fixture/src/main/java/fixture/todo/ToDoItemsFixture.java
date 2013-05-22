@@ -36,11 +36,11 @@ public class ToDoItemsFixture extends AbstractFixture {
 
         removeAllToDosForCurrentUser();
 
-        createToDoItemForCurrentUser("Buy milk", Category.Domestic, daysFromToday(0));
-        createToDoItemForCurrentUser("Buy stamps", Category.Domestic, daysFromToday(0));
-        createToDoItemForCurrentUser("Pick up laundry", Category.Other, daysFromToday(6));
-        createToDoItemForCurrentUser("Write blog post", Category.Professional, null);
-        createToDoItemForCurrentUser("Organize brown bag", Category.Professional, daysFromToday(14));
+        createToDoItemForCurrentUser("Buy milk", Category.Domestico, daysFromToday(0),"Calle Falsa 123");
+        createToDoItemForCurrentUser("Buy stamps", Category.Domestico, daysFromToday(0),"Calle Falsa 123");
+        createToDoItemForCurrentUser("Pick up laundry", Category.Otro, daysFromToday(6),"Calle Falsa 123");
+        createToDoItemForCurrentUser("Write blog post", Category.Profesional, null,"Calle Falsa 123");
+        createToDoItemForCurrentUser("Organize brown bag", Category.Profesional, daysFromToday(14),"Calle Falsa 123");
 
         getContainer().flush();
     }
@@ -49,11 +49,11 @@ public class ToDoItemsFixture extends AbstractFixture {
 
         removeAllToDosFor(user);
 
-        createToDoItemForUser("Buy milk", Category.Domestic, user, daysFromToday(0));
-        createToDoItemForUser("Buy stamps", Category.Domestic, user, daysFromToday(0));
-        createToDoItemForUser("Pick up laundry", Category.Other, user, daysFromToday(6));
-        createToDoItemForUser("Write blog post", Category.Professional, user, null);
-        createToDoItemForUser("Organize brown bag", Category.Professional, user, daysFromToday(14));
+        createToDoItemForUser("Buy milk", Category.Domestico, user, daysFromToday(0),"Calle Falsa 100");
+        createToDoItemForUser("Buy stamps", Category.Domestico, user, daysFromToday(0),"Calle Falsa 120");
+        createToDoItemForUser("Pick up laundry", Category.Otro, user, daysFromToday(6),"Calle Falsa 130");
+        createToDoItemForUser("Write blog post", Category.Profesional, user, null,"Calle Falsa 140");
+        createToDoItemForUser("Organize brown bag", Category.Profesional, user, daysFromToday(14),"Calle Falsa 123");
 
         getContainer().flush();
     }
@@ -74,12 +74,12 @@ public class ToDoItemsFixture extends AbstractFixture {
         }
     }
 
-    private ToDoItem createToDoItemForCurrentUser(final String description, final Category category, final LocalDate dueBy) {
-        return toDoItems.newToDo(description, category, dueBy);
+    private ToDoItem createToDoItemForCurrentUser(final String description, final Category category, final LocalDate dueBy, String direccion) {
+        return toDoItems.newToDo(description, category, dueBy, direccion);
     }
 
-    private ToDoItem createToDoItemForUser(final String description, final Category category, String user, final LocalDate dueBy) {
-        return toDoItems.newToDo(description, category, user, dueBy);
+    private ToDoItem createToDoItemForUser(final String description, final Category category, String user, final LocalDate dueBy, String direccion) {
+        return toDoItems.newToDo(description, category, user, dueBy, direccion);
     }
 
     private static LocalDate daysFromToday(final int i) {
