@@ -78,11 +78,12 @@ public class ToDoItems extends AbstractFactoryAndRepository {
     // {{ newToDo  (action)
     @MemberOrder(sequence = "3")
     public ToDoItem newToDo(
-            @Named("Description") String description, 
-            @Named("Category") Category category,
-            @Named("Due by") LocalDate dueBy) {
+            @Named("Descripcion") String description, 
+            @Named("Categoria") Category category,
+            @Named("Hecho por") LocalDate dueBy,
+            @Named("Direccion") String direccion) {
         final String ownedBy = currentUserName();
-        return newToDo(description, category, ownedBy, dueBy);
+        return newToDo(description, category, ownedBy, dueBy, direccion);
     }
     // }}
 
@@ -105,12 +106,14 @@ public class ToDoItems extends AbstractFactoryAndRepository {
             String description, 
             Category category, 
             String userName,
-            LocalDate dueBy) {
+            LocalDate dueBy,
+            String direccion) {
         final ToDoItem toDoItem = newTransientInstance(ToDoItem.class);
         toDoItem.setDescription(description);
         toDoItem.setCategory(category);
         toDoItem.setOwnedBy(userName);
         toDoItem.setDueBy(dueBy);
+        toDoItem.setDireccion(direccion);
 
         // 
         // GMAP3: uncomment to use https://github.com/danhaywood/isis-wicket-gmap3        

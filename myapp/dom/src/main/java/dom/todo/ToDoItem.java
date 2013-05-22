@@ -78,16 +78,16 @@ import com.google.common.collect.Lists;
             value="SELECT FROM dom.todo.ToDoItem WHERE ownedBy == :ownedBy && description.startsWith(:description)")
 })
 @javax.jdo.annotations.Version(strategy=VersionStrategy.VERSION_NUMBER, column="VERSION")
-@ObjectType("TODO")
+@ObjectType("TODO")	
 @Auditable
 @AutoComplete(repository=ToDoItems.class, action="autoComplete")
-@MemberGroups({"General", "Detail"})
+@MemberGroups({"General", "Detalle","Personal"})
 public class ToDoItem implements Comparable<ToDoItem> /*, Locatable*/ { // GMAP3: uncomment to use https://github.com/danhaywood/isis-wicket-gmap3
 
 	private static final long ONE_WEEK_IN_MILLIS = 7 * 24 * 60 * 60 * 1000L;
 
     public static enum Category {
-        Professional, Domestic, Other;
+        Profesional, Domestico, Otro;
     }
 
     // {{ Identification on the UI
@@ -95,10 +95,10 @@ public class ToDoItem implements Comparable<ToDoItem> /*, Locatable*/ { // GMAP3
         final TitleBuffer buf = new TitleBuffer();
         buf.append(getDescription());
         if (isComplete()) {
-            buf.append(" - Completed!");
+            buf.append(" - Completado!");
         } else {
             if (getDueBy() != null) {
-                buf.append(" due by ", getDueBy());
+                buf.append(" Hecho por: ", getDueBy());
             }
         }
         return buf.toString();
@@ -111,7 +111,7 @@ public class ToDoItem implements Comparable<ToDoItem> /*, Locatable*/ { // GMAP3
 
     @RegEx(validation = "\\w[@&:\\-\\,\\.\\+ \\w]*")
     // words, spaces and selected punctuation
-    @MemberOrder(sequence = "1")
+    @MemberOrder(sequence = "6")
     public String getDescription() {
         return description;
     }
@@ -120,12 +120,30 @@ public class ToDoItem implements Comparable<ToDoItem> /*, Locatable*/ { // GMAP3
         this.description = description;
     }
     // }}
+    
+    
+    // {{ Direccion
+    private String direccion;
+
+    @RegEx(validation = "\\w[@&:\\-\\,\\.\\+ \\w]*")
+    // words, spaces and selected punctuation
+    @MemberOrder(sequence = "7")
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(final String direccion) {
+        this.direccion = direccion;
+    }
+    // }}
+    
+    
 
     // {{ DueBy (property)
     private LocalDate dueBy;
 
     @javax.jdo.annotations.Persistent
-    @MemberOrder(name="Detail", sequence = "3")
+    @MemberOrder(name="Detalle", sequence = "3")
     @Optional
     public LocalDate getDueBy() {
         return dueBy;
@@ -148,6 +166,7 @@ public class ToDoItem implements Comparable<ToDoItem> /*, Locatable*/ { // GMAP3
 
     // {{ Category
     private Category category;
+    
 
     @MemberOrder(sequence = "2")
     public Category getCategory() {
@@ -193,8 +212,8 @@ public class ToDoItem implements Comparable<ToDoItem> /*, Locatable*/ { // GMAP3
 
     @Hidden(where=Where.ALL_TABLES)
     @Optional
-    @MultiLine(numberOfLines=5)
-    @MemberOrder(name="Detail", sequence = "6")
+    @MultiLine(numberOfLines=1)
+    @MemberOrder(name="Detalle", sequence = "1")
     public String getNotes() {
         return notes;
     }
@@ -211,7 +230,7 @@ public class ToDoItem implements Comparable<ToDoItem> /*, Locatable*/ { // GMAP3
 
     @Persistent
     @Optional
-    @MemberOrder(name="Detail", sequence = "7")
+    @MemberOrder(name="Detalle", sequence = "7")
     public Blob getAttachment() {
         return attachment;
     }
@@ -227,7 +246,7 @@ public class ToDoItem implements Comparable<ToDoItem> /*, Locatable*/ { // GMAP3
     // {{ Version (derived property)
     @Hidden(where=Where.ALL_TABLES)
     @Disabled
-    @MemberOrder(name="Detail", sequence = "99")
+    @MemberOrder(name="Detalle", sequence = "99")
     @Named("Version")
     public Long getVersionSequence() {
         if(!(this instanceof PersistenceCapable)) {
@@ -337,14 +356,16 @@ public class ToDoItem implements Comparable<ToDoItem> /*, Locatable*/ { // GMAP3
     // (a) has different semantics and (b) is in any case automatically ignored
     // by the framework
     public ToDoItem duplicate(
-            @Named("Description") 
+            @Named("Descripcion") 
             String description,
-            @Named("Category")
+            @Named("Categoria")
             ToDoItem.Category category, 
-            @Named("Due by") 
+            @Named("Hecho por") 
             @Optional
-            LocalDate dueBy) {
-        return toDoItems.newToDo(description, category, dueBy);
+            LocalDate dueBy,
+            @Named ("Direccion") 
+            String direccion) {
+        return toDoItems.newToDo(description, category, dueBy,direccion);
     }
     public String default0Duplicate() {
         return getDescription() + " - Copy";
