@@ -78,7 +78,7 @@ import com.google.common.collect.Lists;
             value="SELECT FROM dom.todo.ToDoItem WHERE ownedBy == :ownedBy && description.startsWith(:description)")
 })
 @javax.jdo.annotations.Version(strategy=VersionStrategy.VERSION_NUMBER, column="VERSION")
-@ObjectType("TODO")	
+@ObjectType("TODO_los_datos")	
 @Auditable
 @AutoComplete(repository=ToDoItems.class, action="autoComplete")
 @MemberGroups({"General", "Detalle","Personal"})
@@ -98,7 +98,7 @@ public class ToDoItem implements Comparable<ToDoItem> /*, Locatable*/ { // GMAP3
             buf.append(" - Completado!");
         } else {
             if (getDueBy() != null) {
-                buf.append(" Hecho por: ", getDueBy());
+                buf.append(" fecha: ", getDueBy());
             }
         }
         return buf.toString();
@@ -360,7 +360,7 @@ public class ToDoItem implements Comparable<ToDoItem> /*, Locatable*/ { // GMAP3
             String description,
             @Named("Categoria")
             ToDoItem.Category category, 
-            @Named("Hecho por") 
+            @Named("fecha") 
             @Optional
             LocalDate dueBy,
             @Named ("Direccion") 

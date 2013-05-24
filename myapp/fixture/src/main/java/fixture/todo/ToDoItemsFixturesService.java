@@ -33,7 +33,8 @@ import dom.todo.ToDoItems;
 @Named("Fixtures")
 public class ToDoItemsFixturesService extends AbstractService {
 
-    public String install() {
+    public String install() 
+    {
         final ToDoItemsFixture fixture = new ToDoItemsFixture();
         fixture.setContainer(getContainer());
         fixture.setToDoItems(toDoItems);
@@ -48,16 +49,25 @@ public class ToDoItemsFixturesService extends AbstractService {
         fixture.installFor(user);
         return "Example fixtures installed for " + user;
     }
-    public String default0InstallFor() {
+    public String nuevoMenu(@Named("CompletarCampos") String prueba) {
+        final ToDoItemsFixture fixture = new ToDoItemsFixture();
+        fixture.setContainer(getContainer());
+        fixture.setToDoItems(toDoItems);
+        fixture.installFor(prueba);
+        return "Example Complatar " + prueba;
+    }
+    public String default0InstallFor() 
+    {
         return "guest";
     }
-    public List<String> choices0InstallFor() {
-        return Lists.newArrayList("guest", "dick", "bob", "joe");
+    public List<String> choices0InstallFor() 
+    {
+        return Lists.newArrayList("guest", "dick", "bob", "joe","silvana");
     }
 
-    
     private ToDoItems toDoItems;
-    public void setToDoItems(final ToDoItems toDoItems) {
+    public void setToDoItems(final ToDoItems toDoItems) 
+    {
         this.toDoItems = toDoItems;
     }
 

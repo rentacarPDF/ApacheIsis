@@ -36,7 +36,8 @@ import com.google.common.base.Objects;
 import dom.todo.ToDoItem.Category;
 
 @Named("ToDos")
-public class ToDoItems extends AbstractFactoryAndRepository {
+public class ToDoItems extends AbstractFactoryAndRepository
+{
 
     // {{ Id, iconName
     @Override

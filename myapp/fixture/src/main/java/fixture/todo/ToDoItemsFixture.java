@@ -47,7 +47,7 @@ public class ToDoItemsFixture extends AbstractFixture {
 
     public void installFor(String user) {
 
-        removeAllToDosFor(user);
+       removeAllToDosFor(user);
 
         createToDoItemForUser("Buy milk", Category.Domestico, user, daysFromToday(0),"Calle Falsa 100");
         createToDoItemForUser("Buy stamps", Category.Domestico, user, daysFromToday(0),"Calle Falsa 120");
@@ -59,15 +59,18 @@ public class ToDoItemsFixture extends AbstractFixture {
     }
 
     // {{ helpers
-    private void removeAllToDosForCurrentUser() {
+    
+    private void removeAllToDosForCurrentUser() 
+    {
         
         final List<ToDoItem> allToDos = toDoItems.allToDos();
         for (final ToDoItem toDoItem : allToDos) {
             getContainer().remove(toDoItem);
         }
     }
-
-    private void removeAllToDosFor(String user) {
+    
+   private void removeAllToDosFor(String user) 
+    {
         final List<ToDoItem> items = allMatches(ToDoItem.class, ToDoItem.thoseOwnedBy(user));
         for (final ToDoItem toDoItem : items) {
             getContainer().remove(toDoItem);

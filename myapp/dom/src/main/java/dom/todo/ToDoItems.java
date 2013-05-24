@@ -80,7 +80,7 @@ public class ToDoItems extends AbstractFactoryAndRepository {
     public ToDoItem newToDo(
             @Named("Descripcion") String description, 
             @Named("Categoria") Category category,
-            @Named("Hecho por") LocalDate dueBy,
+            @Named("Fecha") LocalDate dueBy,
             @Named("Direccion") String direccion) {
         final String ownedBy = currentUserName();
         return newToDo(description, category, ownedBy, dueBy, direccion);

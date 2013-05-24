@@ -43,10 +43,11 @@ public class ToDoItemsJdo extends ToDoItems {
 
     // {{ done (action)
     @Override
-    public List<ToDoItem> complete() {
+    public List<ToDoItem> complete() 
+    {
         return allMatches(
                 new QueryDefault<ToDoItem>(ToDoItem.class, 
-                        "todo_complete", 
+                        "todo_completado", 
                         "ownedBy", currentUserName()));
     }
     // }}
@@ -56,7 +57,7 @@ public class ToDoItemsJdo extends ToDoItems {
     public List<ToDoItem> similarTo(final ToDoItem thisToDoItem) {
         final List<ToDoItem> similarToDoItems = allMatches(
                 new QueryDefault<ToDoItem>(ToDoItem.class, 
-                        "todo_similarTo", 
+                        "todo_similar", 
                         "ownedBy", currentUserName(), 
                         "category", thisToDoItem.getCategory()));
         return Lists.newArrayList(Iterables.filter(similarToDoItems, excluding(thisToDoItem)));
@@ -78,7 +79,7 @@ public class ToDoItemsJdo extends ToDoItems {
         
         return allMatches(
                 new QueryDefault<ToDoItem>(ToDoItem.class, 
-                        "todo_autoComplete", 
+                        "todo_autocompletado", 
                         "ownedBy", currentUserName(), 
                         "description", description));
     }
