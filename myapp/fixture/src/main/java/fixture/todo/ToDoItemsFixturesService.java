@@ -31,7 +31,8 @@ import dom.todo.ToDoItems;
  * Enables fixtures to be installed from the application.
  */
 @Named("Fixtures")
-public class ToDoItemsFixturesService extends AbstractService {
+public class ToDoItemsFixturesService extends AbstractService 
+{
 
     public String install() 
     {
@@ -49,7 +50,8 @@ public class ToDoItemsFixturesService extends AbstractService {
         fixture.installFor(user);
         return "Example fixtures installed for " + user;
     }
-    public String nuevoMenu(@Named("CompletarCampos") String prueba) {
+    public String nuevoMenu(@Named("CompletarCampos") String prueba)
+    {
         final ToDoItemsFixture fixture = new ToDoItemsFixture();
         fixture.setContainer(getContainer());
         fixture.setToDoItems(toDoItems);

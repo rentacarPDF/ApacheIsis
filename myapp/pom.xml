@@ -305,6 +305,11 @@
                 <artifactId>myapp-webapp</artifactId>
                 <version>s</version>
             </dependency>
+             <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>myapp-ProbandoMenu</artifactId>
+                <version>s</version>
+            </dependency>
 
 
             <!-- 3rd party extensions -->
@@ -342,6 +347,6 @@
     <module>fixture</module>
     <module>objstore-jdo</module>
     <module>viewer-webapp</module>
-    <module>ProbandoMenu</module>
+    <module>myapp-ProbandoMenu</module>
   </modules>
 </project>

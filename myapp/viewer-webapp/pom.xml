@@ -95,6 +95,11 @@
             <artifactId>myapp-objstore-jdo</artifactId>
         </dependency>
         
+            
+        
+         
+        
+        
         
         <!-- other isis components -->
         <dependency>
@@ -174,6 +179,11 @@
         </dependency>
          -->
 
+        <dependency>
+        	<groupId>com.mycompany</groupId>
+        	<artifactId>myapp-ProbandoMenu</artifactId>
+        	<version>s</version>
+        </dependency>
     </dependencies>
 
 </project>
